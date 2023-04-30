@@ -9,9 +9,9 @@ systemctl start dnsmasq
 systemctl unmask hostapd
 systemctl enable hostapd
 systemctl start hostapd
-ip addr flush dev wlan0 2>&1 | show_debug
+ip addr flush dev wlan0
 ip addr add 192.168.150.1 dev wlan0
 # Enable routing
-sysctl net.ipv4.ip_forward=1 2
+sysctl net.ipv4.ip_forward=1
 # Enable NAT
 iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE

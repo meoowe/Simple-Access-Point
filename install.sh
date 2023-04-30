@@ -16,11 +16,11 @@ dnsmasqconfig="/etc/dnsmasq.conf"
 # Hotspot SSID
 echo "Enter the desired Access Point name ($SSID):"
 read ssid
-[[ "$ssid" ]] && SSID="$ssid"
+SSID="$ssid"
 # WPA Password
 echo "Enter the desired Wifi Password NOTE: Make sure it is at least 6 characters long($PASSWD):"
 read PASSWD
-[[ "$wpapass" ]] && PASSWD="$PASSWD"
+PASSWD="$PASSWD"
 # Write the hostapd config file
 cat <<EOF | tee "$hotspotconfig" > /dev/null 2>&1
 # WiFi Hotspot
@@ -50,4 +50,4 @@ interface=wlan0
 dhcp-range=192.168.0.1,192.168.150.10,12h
 EOF
 chmod +x "$dnsmasqconfig"
-fi
+

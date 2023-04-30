@@ -14,11 +14,11 @@ systemctl stop dnsmasq
 hotspotconfig="/etc/hostapd/hostapd.conf"
 dnsmasqconfig="/etc/dnsmasq.conf"
 # Hotspot SSID
-show_msg "Enter the desired Access Point name ($SSID):"
+echo "Enter the desired Access Point name ($SSID):"
 read ssid
 [[ "$ssid" ]] && SSID="$ssid"
 # WPA Password
-show_msg "Enter the desired Wifi Password NOTE: Make sure it is at least 6 characters long($PASSWD):"
+echo "Enter the desired Wifi Password NOTE: Make sure it is at least 6 characters long($PASSWD):"
 read PASSWD
 [[ "$wpapass" ]] && PASSWD="$PASSWD"
 # Write the hostapd config file

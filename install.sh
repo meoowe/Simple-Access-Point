@@ -51,3 +51,4 @@ dhcp-range=192.168.0.1,192.168.150.10,12h
 EOF
 chmod +x "$dnsmasqconfig"
 
+echo "We're done here! Run start.sh now."

@@ -4,17 +4,7 @@ if ! [ $(id -u) = 0 ]; then
    echo "I am not root! Run me as root please :|"
    exit 1
 fi
-if command -v iwconfig > /dev/null; then  #Checking presence of iwconfig
-    INTERFACE_WLAN=$(iwconfig 2>&1 | grep "^wlan" | sed -e 's/ .*//g' | tail -n 1) #Assuming interface uses old wlan convention
-    if [[ ! $INTERFACE_WLAN ]]; then
-        INTERFACE_WLAN=$(iwconfig 2>&1 | grep "^wlp" | sed -e 's/ .*//g' | tail -n 1)  #Assuming interface uses new wlp convention
-    fi
-elif command -v iw > /dev/null; then
-    INTERFACE_WLAN=$(iw dev 2>&1 | grep "wlan" | awk '{print $2}' | tail -n 1)
-    if [[ ! $INTERFACE_WLAN ]]; then
-        INTERFACE_WLAN=$(iwconfig 2>&1 | grep "^wlp" | sed -e 's/ .*//g' | tail -n 1)
-    fi
-fi
+
 
 apt-get update  # To get the latest package lists
 apt-get install hostapd -y #hostapd to actualy broadcast the network
@@ -34,7 +24,7 @@ read PASSWD
 # Write the hostapd config file
 cat <<EOF | tee "$hotspotconfig" > /dev/null 2>&1
 # WiFi Hotspot
-interface=$INTERFACE_WLAN
+interface=wlan0
 driver=nl80211 
 #Access Point
 ssid=$SSID
@@ -55,10 +45,9 @@ cat <<EOF | tee "$dnsmasqconfig" > /dev/null 2>&1
 # Bind to only one interface
 bind-interfaces
 # Choose interface for binding
-interface=$INTERFACE_WLAN
+interface=wlan0
 # Specify range of IP addresses for DHCP leases
 dhcp-range=192.168.0.1,192.168.150.10,12h
-#INTERFACE_NET=$INTERFACE_NET
 EOF
 chmod +x "$dnsmasqconfig"
 fi

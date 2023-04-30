@@ -21,6 +21,7 @@ SSID="$ssid"
 echo "Enter the desired Wifi Password NOTE: Make sure it is at least 6 characters long($PASSWD):"
 read PASSWD
 PASSWD="$PASSWD"
+
 # Write the hostapd config file
 cat <<EOF | tee "$hotspotconfig" > /dev/null 2>&1
 # WiFi Hotspot
@@ -35,7 +36,7 @@ macaddr_acl=0
 auth_algs=1
 ignore_broadcast_ssid=0
 wpa=2
-wpa_passphrase=$WPAPASS
+wpa_passphrase=$PASSWD
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP

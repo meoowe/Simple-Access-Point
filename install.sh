@@ -39,7 +39,9 @@ wpa_passphrase=$WPAPASS
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
-EOF 
+
+EOF
+
 if [[ ! $(grep "Bind to only one interface" "$dnsmasqconfig" > /dev/null 2>&1) ]]; then
 cat <<EOF | tee "$dnsmasqconfig" > /dev/null 2>&1
 # Bind to only one interface
@@ -50,5 +52,6 @@ interface=wlan0
 dhcp-range=192.168.0.1,192.168.150.10,12h
 EOF
 chmod +x "$dnsmasqconfig"
+fi
 
 echo "We're done here! Run start.sh now."

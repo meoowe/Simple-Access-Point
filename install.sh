@@ -26,10 +26,10 @@ PASSWD="$PASSWD"
 cat <<EOF | tee "$hotspotconfig" > /dev/null 2>&1
 # WiFi Hotspot
 interface=wlan0
-driver=nl80211 
 #Access Point
 ssid=$SSID
-hw_mode=g # g = 2.4Ghz
+# g = 2.4Ghz
+hw_mode=g
 # WiFi Channel:
 channel=11
 macaddr_acl=0
